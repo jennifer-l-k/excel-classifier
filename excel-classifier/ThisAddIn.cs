@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
+using System.Drawing;
 
 namespace excel_classifier
 {
@@ -14,10 +15,11 @@ namespace excel_classifier
         void Application_WorkbookBeforeSave(Microsoft.Office.Interop.Excel.Workbook Wb, bool SaveAsUI, ref bool Cancel)
         {
             Excel.Worksheet activeWorksheet = ((Excel.Worksheet)Application.ActiveSheet);
-            Excel.Range firstRow = activeWorksheet.get_Range("A1");
+            Excel.Range firstRow = activeWorksheet.get_Range("A1:A1");
             firstRow.EntireRow.Insert(Excel.XlInsertShiftDirection.xlShiftDown);
-            Excel.Range newFirstRow = activeWorksheet.get_Range("A1");
+            Excel.Range newFirstRow = activeWorksheet.get_Range("A1:A1");
             newFirstRow.Value2 = "This text was added by using code";
+            newFirstRow.Font.Color = Color.Red;
         }
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
